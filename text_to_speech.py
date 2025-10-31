@@ -7,7 +7,6 @@ from gtts import gTTS
 import os
 import tempfile
 from typing import Optional
-import pygame
 from io import BytesIO
 
 
@@ -17,8 +16,7 @@ class HindiTTS:
     """
     
     def __init__(self):
-        """Initialize TTS with pygame for audio playback"""
-        pygame.mixer.init()
+        """Initialize TTS; playback handled by caller (e.g., Streamlit)."""
         self.temp_dir = tempfile.gettempdir()
     
     def speak(self, text: str, save_file: Optional[str] = None) -> bool:
@@ -44,9 +42,7 @@ class HindiTTS:
             if save_file:
                 tts.save(save_file)
             
-            # Play the audio
-            self._play_audio(temp_file)
-            
+            # Caller is responsible for playback; we just save.
             # Clean up temporary file
             if os.path.exists(temp_file):
                 os.remove(temp_file)
@@ -82,23 +78,7 @@ class HindiTTS:
             print(f"TTS Error: {e}")
             return b''
     
-    def _play_audio(self, file_path: str):
-        """
-        Play audio file using pygame
-        
-        Args:
-            file_path: Path to audio file
-        """
-        try:
-            pygame.mixer.music.load(file_path)
-            pygame.mixer.music.play()
-            
-            # Wait for playback to finish
-            while pygame.mixer.music.get_busy():
-                pygame.time.Clock().tick(10)
-                
-        except Exception as e:
-            print(f"Audio playback error: {e}")
+    # Local playback helper removed to keep cloud build lightweight
 
 
 def test_tts():
@@ -113,7 +93,7 @@ def test_tts():
     
     for text in test_texts:
         print(f"\nSpeaking: {text}")
-        tts.speak(text)
+        _ = tts.speak_streamlit(text)
         import time
         time.sleep(2)
 

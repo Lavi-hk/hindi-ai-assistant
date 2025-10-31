@@ -189,6 +189,55 @@ The application will open in your default web browser at `http://localhost:8501`
 
 ---
 
+## ☁️ Deployment
+
+Choose one of the following options:
+
+### Option A: Streamlit Community Cloud (fastest)
+1. Push this repo to GitHub (already done)
+2. Go to Streamlit Cloud → “New app” → Connect your GitHub → pick repo and branch
+3. App file: `app.py`
+4. Add secret (optional): `OPENAI_API_KEY`
+5. Deploy
+
+Notes:
+- File upload works in cloud. Microphone and server-side OpenCV camera do not work in cloud as-is.
+- Face detection is best run locally (uses server webcam). You can leave it disabled in cloud.
+
+### Option B: Hugging Face Spaces (Streamlit)
+1. Create a new Space → SDK: Streamlit
+2. Connect your repo or upload files
+3. Hardware: CPU is fine
+4. Set “App file” to `app.py`
+5. Add secret (optional): `OPENAI_API_KEY`
+
+### Option C: Render
+1. Create a new Web Service from your GitHub repo
+2. Render will use `render.yaml` and run:
+   - Build: `pip install -r requirements.txt`
+   - Start: `streamlit run app.py --server.port $PORT --server.address 0.0.0.0`
+3. Add environment variable if needed: `OPENAI_API_KEY`
+
+### Option D: Docker (Cloud Run/EC2/VPS)
+Build and run locally:
+```bash
+docker build -t hindi-ai-assistant .
+docker run -p 8501:8501 --env OPENAI_API_KEY=your_key hindi-ai-assistant
+```
+Open: `http://localhost:8501`
+
+Deploy to your platform (examples):
+- Google Cloud Run:
+  - `gcloud builds submit --tag gcr.io/PROJECT_ID/hindi-ai-assistant`
+  - `gcloud run deploy hindi-ai-assistant --image gcr.io/PROJECT_ID/hindi-ai-assistant --platform managed --allow-unauthenticated`
+- Any VPS: run the two docker commands above
+
+Notes:
+- gTTS and Google SpeechRecognition require internet access; they work fine in cloud.
+- For face detection, deploy on a machine that can access a webcam, or keep it disabled in cloud.
+
+---
+
 ## 🏗 Architecture
 
 ### Project Structure
