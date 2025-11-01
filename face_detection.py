@@ -3,7 +3,11 @@ Face Detection Module for Hindi AI Assistant
 Detects faces using webcam with OpenCV
 """
 
-import cv2
+try:
+    import cv2
+    CV2_AVAILABLE = True
+except Exception:
+    CV2_AVAILABLE = False
 import numpy as np
 from typing import Tuple
 
@@ -15,6 +19,8 @@ class FaceDetector:
     
     def __init__(self):
         """Initialize the face detector"""
+        if not CV2_AVAILABLE:
+            raise ImportError("OpenCV not available")
         # Load pre-trained face detection model
         self.face_cascade = cv2.CascadeClassifier(
             cv2.data.haarcascades + 'haarcascade_frontalface_default.xml'

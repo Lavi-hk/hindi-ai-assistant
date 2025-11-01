@@ -9,8 +9,7 @@ import os
 from speech_to_text import HindiSTT
 from response_generator import ResponseGenerator
 from text_to_speech import HindiTTS
-from face_detection import FaceDetector
-import cv2
+# Lazy imports for optional features to avoid cloud import errors
 from PIL import Image
 import numpy as np
 
@@ -246,6 +245,14 @@ def main():
             camera_placeholder = st.empty()
             
             with st.spinner("📷 कैमरा शुरू कर रहे हैं..."):
+                # Import only when needed to avoid cv2 import on cloud
+                try:
+                    from face_detection import FaceDetector
+                    import cv2
+                except Exception:
+                    st.error("OpenCV not available in this environment. Run locally for face detection.")
+                    st.stop()
+
                 detector = FaceDetector()
                 
                 if detector.initialize_camera():
