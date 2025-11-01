@@ -533,7 +533,7 @@ Run the full application:
 streamlit run app.py
 ```
 
-Upload `sample_audio/hindi_test.wav` and verify the workflow.
+Upload `https://hindi-ai-assistant-2hdbjl2ki8zy8vjgsyrypi.streamlit.app/` and verify the workflow.
 
 ---
 
@@ -541,9 +541,9 @@ Upload `sample_audio/hindi_test.wav` and verify the workflow.
 
 For questions, issues, or contributions:
 
-- **Repository:** [GitHub Link]
-- **Issues:** [Issues Link]
-- **Email:** [Your Email]
+- **Repository:** https://github.com/Lavi-hk/hindi-ai-assistant
+- **App:** https://hindi-ai-assistant-2hdbjl2ki8zy8vjgsyrypi.streamlit.app/
+- **Email:** harpreetkour0128@gmail.com
 
 ---
 
