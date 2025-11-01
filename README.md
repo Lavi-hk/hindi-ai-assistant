@@ -466,7 +466,7 @@ detector.release_camera()
 
 Watch the demo video to see the Hindi AI Assistant in action:
 
-**Demo Link:** [YouTube/Vimeo/Demo URL]
+**Demo Link:** https://drive.google.com/file/d/1rQsk-UpTkpVM7cro2M_p354X5BD1883z/view?usp=sharing
 
 **Features Demonstrated:**
 1. Audio file upload and transcription
